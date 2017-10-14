@@ -105,3 +105,21 @@
 
   expect(false).not_to be_nil
 ```
+
+9. Numeric comparison
+
+```ruby
+  expect(100).to eq(100)
+  expect(100).to be == 100
+
+  expect(100).to be > 99
+  expect(100).to be < 101
+  expect(100).to be >= 100
+  expect(100).to be <= 100
+
+  expect(5).to be_between(3, 5).inclusive #=> include 3 and 5 in the range
+  expect(5).not_to be_between(3, 5).exclusive #=> exclude 3 and 5
+
+  expect(100).to be_within(5).of(105) #=> specify a delta of variation
+  expect(1..10).to cover(3) #=> specify the number the range should cover
+```
