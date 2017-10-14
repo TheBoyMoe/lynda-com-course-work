@@ -57,7 +57,7 @@
   - there are equivalence, truthiness, numeric-comparison, collection and observation matchers.
 
 
-7. testing equivalence in ruby & RSpec
+7. Testing equivalence in ruby & RSpec
 
 ```ruby
   x = 1
@@ -85,3 +85,23 @@
 
 ```
   `be` is an alias of `equal`
+
+8. Testing 'truthiness' - tells you if something is true or false
+    - the presence of a value or object counts as being `truthy`
+    - the evaluation of a condition, e.g. 5 > 3, can be true/false
+    - the values true and false are true and false respectively
+    - only nil or false count as `falsy`, although nil is not false
+
+```ruby
+  expect().to be(true)
+  expect().not_to be(true)
+
+  expect().to be(false)
+  expect().to be(nil)
+
+  expect().to be_truthy
+  expect().to be_falsey
+  expect().to be_nil
+
+  expect(false).not_to be_nil
+```
