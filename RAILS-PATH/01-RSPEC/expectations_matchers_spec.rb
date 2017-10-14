@@ -95,4 +95,56 @@ describe 'Expectation Matchers' do
 
   end
 
+  describe 'collection matchers' do
+
+    it 'will match arrays' do
+      array = [1,2,3]
+
+      expect(array).to include(3)
+      expect(array).to include(3,1) #=> any number of elements, any order
+
+      expect(array).to start_with(1)
+      expect(array).to end_with(3)
+
+
+      expect(array).to eq([1,2,3]) #=> exact match
+      expect(array).not_to eq([3,2,1])
+
+      expect(array).to match_array([2,3,1]) #=> same elements in any order
+      expect(array).not_to match_array([1,2])
+
+      expect(array).to contain_exactly(3,2,1)   # similar to match_array, except providing invidual items
+      expect(array).not_to contain_exactly(1,2) # but use individual args
+    end
+
+    it 'will match strings' do
+      string = 'some string'
+
+      expect(string).to include('ring')
+      expect(string).to include('so', 'ring') #=. can passs in more than one argument
+
+      expect(string).to start_with('so')
+      expect(string).to end_with('ring')
+
+      expect(string).to eq('some string') #=> exact match
+    end
+
+    it 'will match hashes' do
+      # hash matcher checks for one or more keys or key-value-pairs
+      hash = {a: 1, b: 2, c: 3}
+
+      expect(hash).to include(:a) #=> expect the hash to include the key :a
+      expect(hash).to include(:b, :c)
+      expect(hash).to include(:a => 1)
+
+      expect(hash).to include(:a => 1, :c => 3) #=> pass in individual args
+      expect(hash).to include({c: 3, a: 1}) #=> or hashes
+
+      # in ruby, keys that are strings DO NOT match keys that are symbols
+      # that's not the case with testing Rails apps, you can use the two interchangeably
+      expect(hash).not_to include({'a' => 1, 'c' => 3})
+    end
+
+  end
+
 end

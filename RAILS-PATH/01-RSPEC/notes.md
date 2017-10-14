@@ -123,3 +123,5 @@
   expect(100).to be_within(5).of(105) #=> specify a delta of variation
   expect(1..10).to cover(3) #=> specify the number the range should cover
 ```
+
+10. Collection matchers - used to match arrays, hashes or strings
