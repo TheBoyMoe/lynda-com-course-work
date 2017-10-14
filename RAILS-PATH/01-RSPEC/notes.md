@@ -125,3 +125,56 @@
 ```
 
 10. Collection matchers - used to match arrays, hashes or strings
+
+11. Regular expression matcher - match a string using a regular expression, only works on strings
+
+```ruby
+  string = 'Hello world'
+  expect(string).to match(/^H.+a$/)
+
+  expect('123').to match(/\d{3}/) #=> match 3 digits
+  expect(123).not_to match(/\d{3}/)
+```
+
+12. Object type matcher - check if an object is an instance of a class
+      - instance - object type has to be the object's class, `@bob` has to be an instance of the Subscriber class
+      - kind_of/be_a - the object, `@bob`, must be in the classes hierarchy, must be a subclass of customer, e.g. `Customer` is a superclass of `Subscriber`, or `Customer` is a module that has been mixed in.
+
+```ruby
+  expect(@bob).to be_an_instance_of(Subscriber) #=> check if the object is an instance of a class
+  expect(@bob).to be_instance_of(Subscriber) #=> alias of above
+
+  expect(@bob).to be_kind_of(Customer)
+  expect(@bob).to be_a_kind_of(Customer)
+  expect(@bob).to be_a(Customer)
+
+  expect([1,2,3]).to be_an(Array)
+  expect('hello world').to be_a(String)
+```
+
+13. Respond to matcher - check if an object responds to a certain method.
+
+```ruby
+  expect(@bob).to respond_to(:first_name)
+```
+
+
+14. Attribute matcher - check if an object has certain attributes
+
+```ruby
+  expect(@bob).to have_attributes(first_name:, last_name:)
+
+  # check that the attributes and values match
+  expect(@bob).to have_attributes(first_name: 'Bob', last_name: 'Smith')   
+```
+
+
+15. Satisfy matcher - takes a block (not an argument). The result should be true/false
+
+```ruby
+  expect(5).to satisfy {|v| v < 8 && v.even?}
+
+  expect(@new_order).to satisfy do |order|
+    order.placed? && order.email_sent?
+  end
+```
